@@ -8,7 +8,7 @@ import { Navigate } from "react-router-dom";
 import authStore from "./store/authStore.js"
 import { Loader } from "lucide-react"
 import { useEffect } from "react"
-import ProtectedRoute from "./components/protectedRoute.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AnalysisPage from "./pages/ReviewAnalysis/ReviewAnalysis.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import EditReview from "./components/EditReview.jsx";
