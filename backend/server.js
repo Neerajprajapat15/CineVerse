@@ -24,7 +24,6 @@ app.use(cors({
 
 
 // Routes
-app.get("/", (req, res) => res.send("App is running"));
 app.use("/api/auth", authRoutes);
 app.use("/api/movies", movieRoutes);
 app.use("/api/reviews", reviewRoutes);
