@@ -8,10 +8,10 @@ import reviewRoutes from "./routes/reviewRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import cookieParser from "cookie-parser";
 import path from "path"
+import { fileURLToPath } from 'url';
 
 // Load environment variables
 dotenv.config();
-const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json({ limit: '50mb' }));
@@ -30,12 +30,14 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/users", userRoutes);
 
 // for production
-if(process.env.NODE_ENV==="production"){
-    const frontendPath = path.join(__dirname, "./frontend", "dist");
-    app.use(express.static(frontendPath));
 
-    app.get("*all", (req, res) => {
-    res.sendFile(path.join(frontendPath, "index.html"));
+if(process.env.NODE_ENV==="production"){
+    const __filename = fileURLToPath(import.meta.url); 
+    const __dirname = path.dirname(__filename);
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+    app.get("/*", (req, res) =>{ 
+        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
     });
 }
 
