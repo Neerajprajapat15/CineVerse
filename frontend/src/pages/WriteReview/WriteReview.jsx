@@ -5,6 +5,7 @@ import useAuthStore from "../../store/authStore";
 import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import API from "../../services/api";
 
 const WriteReview = () => {
   const { authUser } = useAuthStore();
@@ -28,8 +29,8 @@ const WriteReview = () => {
       setLoading(true); // show loader
       const backendRating = Math.ceil(rating * 2);
 
-      const res = await axios.post(
-        "http://localhost:5000/api/reviews",
+      const res = await API.post(
+        `/reviews`,
         {
           tmdb_id: id,
           rating: backendRating,
