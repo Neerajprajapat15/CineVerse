@@ -42,7 +42,7 @@ const useMovieStore = create((set, get) => ({
   fetchTrendingMovies: async (limit = 10) => {
     try {
       set({ loadingTrending: true });
-      const res = await axios.get(`${BASE_URL}/movies/trending?limit=${limit}`);
+      const res = await API.get(`/movies/trending?limit=${limit}`);
       const movies = Array.isArray(res.data)
         ? res.data.slice(0, limit).sort((a, b) => b.popularity - a.popularity)
         : [];
@@ -62,7 +62,7 @@ const useMovieStore = create((set, get) => ({
 
     try {
       set({ loadingFiltered: true });
-      const res = await axios.get(`${BASE_URL}/movies/filter`, {
+      const res = await API.get(`/movies/filter`, {
         params: { genreId, startYear, endYear },
       });
       const movies = Array.isArray(res.data)
@@ -133,7 +133,7 @@ const useMovieStore = create((set, get) => ({
     }
     try {
       set({ loadingSearch: true });
-      const res = await axios.get(`${BASE_URL}/movies/search`, {
+      const res = await API.get(`/movies/search`, {
         params: { query },
       });
       const movies = Array.isArray(res.data)
