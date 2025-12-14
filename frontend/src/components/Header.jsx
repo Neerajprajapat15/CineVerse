@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import { LogOut } from "lucide-react";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const { authUser, logout } = useAuthStore(); // get logout function
@@ -15,6 +16,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     await logout(); // clear auth state + call backend if implemented in store
+    toast.success("Logged out successfully");
     navigate("/"); // redirect to login
   };
 
