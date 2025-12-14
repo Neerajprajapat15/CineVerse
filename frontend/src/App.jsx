@@ -24,7 +24,6 @@ export default function App() {
     loadUser()
   }, [loadUser])
 
-  console.log({ authUser });
 
   if (loading && !authUser) {
     return (

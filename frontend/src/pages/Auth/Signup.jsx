@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import toast from "react-hot-toast";
+
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const Signup = () => {
   const [previewPic, setPreviewPic] = useState(null);
   const { signup } = useAuthStore(); // store method to call API
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -38,7 +40,7 @@ const Signup = () => {
 
     try {
       await signup(formData); // call store method
-      navigate("/write-review/:id"); // redirect after signup
+       navigate(from, { replace: true });
     } catch (err) {
       console.error(err);
       alert(err.message || "Signup failed");

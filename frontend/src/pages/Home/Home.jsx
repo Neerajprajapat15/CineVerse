@@ -32,6 +32,7 @@ const Home = () => {
   const [displayCount, setDisplayCount] = useState(10); // number of movies to show
   const [searchQuery, setSearchQuery] = useState("");
   const [sliderValues, setSliderValues] = useState([startYear, endYear]);
+
   
 
 
@@ -72,6 +73,7 @@ const Home = () => {
   const handleSearch = () => {
     if (searchQuery.trim()) {
       searchMovies(searchQuery.trim());
+      setSearchQuery("");
     }
   };
 

@@ -6,6 +6,9 @@ import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import API from "../../services/api";
+import useMovieStore from "../../store/movieStore";
+import { useEffect } from "react";
+import MovieDetailLoading from "../../components/MovieDetailLoading";
 
 const WriteReview = () => {
   const { authUser } = useAuthStore();
@@ -18,9 +21,38 @@ const WriteReview = () => {
   const [hover, setHover] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const {
+    movieDetails,
+    loadingMovie,
+    error,
+    fetchMovieDetails,
+    clearMovieDetails,
+  } = useMovieStore();
+
+   useEffect(() => {
+      if (id) {
+        fetchMovieDetails(id);
+      }
+      return () => clearMovieDetails(); // cleanup when leaving
+    }, [id, fetchMovieDetails, clearMovieDetails]);
+
+    if (loadingMovie) {
+    return <MovieDetailLoading />;
+  }
+
+  if (error) {
+    return <p className="text-red-500 text-center mt-10">{error}</p>;
+  }
+
+  if (!movieDetails) {
+    return null; // nothing to show
+  }
+
+  
+
   const { movie_title, poster_path } = location.state || {
-    movie_title: "Unknown Movie",
-    poster_path: "/placeholder.jpg",
+    movie_title: movieDetails.title,
+    poster_path: `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`,
   };
 
   const handleSubmit = async (e) => {
