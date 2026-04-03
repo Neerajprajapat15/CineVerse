@@ -45,12 +45,12 @@ export const submitReview = async (req, res) => {
     // --- Call sentiment & hate-speech APIs in parallel ---
     const [sentimentRes, hateSpeechRes] = await Promise.all([
       axios.post(
-        "https://nikhilvaishnav17.pythonanywhere.com/predict_sentiment",
+        "https://cineverse-sentiment-api.vercel.app/predict_sentiment",
         { review: review_text, stars: rating},
         { auth }
       ),
       axios.post(
-        "https://nikhilvaishnav17.pythonanywhere.com/predict_hate_speech",
+        "https://cineverse-sentiment-api.vercel.app/predict_hate_speech",
         { review: review_text },
         { auth }
       ),

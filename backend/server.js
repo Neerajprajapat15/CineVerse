@@ -20,7 +20,7 @@ app.use(cookieParser());
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 app.use(cors({
   origin: CLIENT_URL,
-  credentials: true                  // allow cookies
+  credentials: true,                  // allow cookies
 }));
 
 
@@ -29,7 +29,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/movies", movieRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/users", userRoutes);
-
 // for production
 
 if(process.env.NODE_ENV==="production"){
