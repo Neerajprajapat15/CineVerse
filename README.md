@@ -155,4 +155,4 @@ Potential next steps for CineVerse:
 
 ## Author
 
-Neeraj
+Neeraj Prajapat
